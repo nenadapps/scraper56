@@ -221,7 +221,9 @@ def get_page_items(url):
 
     try:
         for item in html.select('.itemTitle a'):
-            item_link = item.get('href')
+            item_link_temp = item.get('href')
+            item_link_parts = item_link_temp.split('&zenid')
+            item_link = item_link_parts[0]
             if item_link not in items:
                 items.append(item_link)
     except:
@@ -338,13 +340,15 @@ selected_main_category = main_categories[selection]
 categories = get_categories(selected_main_category)  
 if len(categories):
     for category in categories:
-        print(category)
-        choice = input("Do you want to scrape this?")
-        if choice.lower() == 'y':
-            page_url = categories[category]
-            get_page_item_details(page_url)
-        else:
-            pass
+        if selection == "Worldwide Stamps":
+            print(category)
+            choice = input("Do you want to scrape this?")
+            if choice.lower() == 'y':
+                pass
+            else:
+                continue
+            
+        get_page_item_details(categories[category])    
 else:        
     get_page_item_details(selected_main_category) 
         
