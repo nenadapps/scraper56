@@ -198,8 +198,8 @@ def get_details(url):
         stamp['subcategory'] = None        
         
     try:
-        if html.select('.productSpecialPrice'):
-            price = html.select('.productSpecialPrice')[0].get_text().strip()
+        if html.select('#productGeneral .productSpecialPrice'):
+            price = html.select('#productGeneral .productSpecialPrice')[0].get_text().strip()
         else:
             price = html.select('#productPrices')[0].get_text().strip()
         price = price.replace('$', '').replace(',', '').strip()
